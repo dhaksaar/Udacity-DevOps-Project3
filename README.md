@@ -48,3 +48,19 @@ Output :
   }
  ```
  
+Create a Service principle to grant access to Azure Resources
+```sh
+ az ad sp create-for-rbac --name="Terraform" --role="Contributor" 
+```sh
+ Output 
+ ![image](https://user-images.githubusercontent.com/24310615/123100366-f7709e80-d42a-11eb-90c5-4c0bf8ee40f7.png)
+
+ Note down the appid, password and tenant id and update the terraform.tfvars file
+ ```sh
+ # Azure subscription vars
+subscription_id = ""
+client_id = ""
+client_secret = ""
+tenant_id = ""
+ ```sh
+ 
