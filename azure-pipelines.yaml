@@ -2,19 +2,12 @@ name: Azure Pipelines
 variables:
   python.version: '3.7.6'
 stages:
-- stage: Build
+- stage: Infrastructure Provision
   jobs:
-  - job: Build
+  - job:  provision_infrastructure
     pool:
       name: Hosted Ubuntu 1604
     steps:
-    # Needed for Terraform VM deployment
-    # - task: InstallSSHKey@0
-    #   inputs:
-    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
-    #     sshPublicKey: 'PUBLIC_KEY'
-    #     sshKeySecureFile: 'id_rsa'
-
     - task: DownloadSecureFile@1
       displayName: Download terraform.tfvars 
       inputs:
@@ -54,7 +47,22 @@ stages:
         commandOptions: |
           -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-    
+        environmentServiceNameAzureRM: 'Project3'
+
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      name: Hosted Ubuntu 1604
+    steps:
+    # Needed for Terraform VM deployment
+    # - task: InstallSSHKey@0
+    #   inputs:
+    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
+    #     sshPublicKey: 'PUBLIC_KEY'
+    #     sshKeySecureFile: 'id_rsa'
+
+
 #    - task: ArchiveFiles@2
 #      displayName: 'Archive FakeRestAPI'
 #      inputs:
