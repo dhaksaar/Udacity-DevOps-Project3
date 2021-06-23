@@ -36,10 +36,6 @@ stages:
       inputs:
           provider: 'azurerm'
           command: 'init'
-          backendServiceArm: 'Project3'
-          backendAzureRmResourceGroupName: 'project3'
-          backendAzureRmStorageAccountName: 'daxproj3tf'
-          backendAzureRmContainerName: 'terraform'
           backendAzureRmKey: 'terraform.tfstate'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       
@@ -47,7 +43,13 @@ stages:
       inputs:
           provider: 'azurerm'
           command: 'validate'
-
+    - task: TerraformTaskV2@2
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        commandOptions: |
+          -auto-approve 
+        
     
 #    - task: ArchiveFiles@2
 #      displayName: 'Archive FakeRestAPI'
