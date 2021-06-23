@@ -10,7 +10,7 @@ terraform {
     storage_account_name = "daxproj3tf"
     container_name       = "terraform"
     key                  = "terrafom.tfstate"
-    access_key           = "vN9d8xNdYR6EPzmNEkqbol5PwPieVZFS4HsGBnFwt3RlkFVxgJYd6yapZQ2wqwnX/XI58R2WVwIq4Hgh2kJMDg=="
+    access_key           = ""
   }
 }
 module "resource_group" {
