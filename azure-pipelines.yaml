@@ -36,6 +36,10 @@ stages:
       inputs:
           provider: 'azurerm'
           command: 'init'
+          backendServiceArm: 'Project3'
+          backendAzureRmResourceGroupName: 'project3'
+          backendAzureRmStorageAccountName: 'daxproj3tf'
+          backendAzureRmContainerName: 'terraform'
           backendAzureRmKey: 'terraform.tfstate'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       
