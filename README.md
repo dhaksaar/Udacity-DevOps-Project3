@@ -3,7 +3,7 @@
 Clone the repository 
 
 Login to Azure CLI using the az login command
-![image](https://user-images.githubusercontent.com/24310615/123079323-bf119600-d413-11eb-820a-52de89befb85.png)
+![image](https://user-images.githubusercontent.com/24310615/123080113-81613d00-d414-11eb-8cdf-88edc3a4fc57.png)
 
 Create a resource group to group the resources created in the project, replace <resourcegroup-name> and <location> as required
 ```sh
