@@ -49,20 +49,18 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
         environmentServiceNameAzureRM: 'Project3'
 
-- stage: Build
-  jobs:
-  - job: Build
-    pool:
-      name: Hosted Ubuntu 1604
-    steps:
+#- stage: Build
+#  jobs:
+# - job: Build
+#    pool:
+#      name: Hosted Ubuntu 1604
+ #   steps:
     # Needed for Terraform VM deployment
     # - task: InstallSSHKey@0
     #   inputs:
     #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
     #     sshPublicKey: 'PUBLIC_KEY'
     #     sshKeySecureFile: 'id_rsa'
-
-
 #    - task: ArchiveFiles@2
 #      displayName: 'Archive FakeRestAPI'
 #      inputs:
@@ -104,8 +102,7 @@ stages:
   #           inputs:
   #             targetType: 'inline'
   #             script: |
-  #               #! /bin/bash
-                
+  #               #! /bin/bash              
   #               sudo apt-get upgrade -y
   #               sudo apt-get install python3-pip -y
   #               sudo apt-get install unzip -y
