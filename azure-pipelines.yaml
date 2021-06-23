@@ -53,7 +53,7 @@ stages:
         command: 'plan'
         commandOptions: |
           -auto-approve 
-        environmentServiceNameAzureRM: 'Project3'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     
 #    - task: ArchiveFiles@2
 #      displayName: 'Archive FakeRestAPI'
