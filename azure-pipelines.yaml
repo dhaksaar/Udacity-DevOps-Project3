@@ -87,12 +87,11 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: 'Project3'
+              azureSubscription: 'Pay-As-You-Go(01a8947a-1aa7-45ad-8bd4-e0ab9e615903)'
               appName: 'DaxinDemoApp-AppService'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
  
-
 - stage: destroy_infrastructure
   jobs:
   - job:  destroy_infrastructure
