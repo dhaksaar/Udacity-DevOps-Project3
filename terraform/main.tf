@@ -7,6 +7,7 @@ provider "azurerm" {
 }
 terraform {
   backend "azurerm" {
+    resource_group_name  = "${var.resource_group}"
     storage_account_name = "daxproj3tf"
     container_name       = "terraform"
     key                  = "terrafom.tfstate"
