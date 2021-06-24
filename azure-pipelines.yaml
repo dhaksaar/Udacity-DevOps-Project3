@@ -2,19 +2,13 @@ name: Azure Pipelines
 variables:
   python.version: '3.7.6'
 stages:
-- stage: Build
+- stage: provision_infrastructure
   jobs:
-  - job: Build
+  - job:  provision_infrastructure
+    displayName: Provision Infrastructure
     pool:
       name: Hosted Ubuntu 1604
     steps:
-    # Needed for Terraform VM deployment
-    # - task: InstallSSHKey@0
-    #   inputs:
-    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
-    #     sshPublicKey: 'PUBLIC_KEY'
-    #     sshKeySecureFile: 'id_rsa'
-
     - task: DownloadSecureFile@1
       displayName: Download terraform.tfvars 
       inputs:
@@ -47,8 +41,71 @@ stages:
       inputs:
           provider: 'azurerm'
           command: 'validate'
+    - task: TerraformTaskV2@2
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        commandOptions: |
+          -auto-approve 
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        environmentServiceNameAzureRM: 'Project3'
 
-    
+- stage: destroy_infrastructure
+  jobs:
+  - job:  destroy_infrastructure
+    displayName: Destroy Infrastructure
+    pool:
+      name: Hosted Ubuntu 1604
+    steps:
+    - task: DownloadSecureFile@1
+      displayName: Download terraform.tfvars 
+      inputs:
+        secureFile: 'terraform.tfvars'
+
+    - task: Bash@3
+      displayName: Copy terraform.tfvars 
+      inputs:
+          targetType: 'inline'
+          script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform
+           
+    - task: TerraformInstaller@0
+      displayName: Install Terraform
+      inputs:
+          terraformVersion: 'v0.15.4'
+      
+    - task: TerraformTaskV2@2
+      displayName: "Terraform Init"
+      inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'Project3'
+          backendAzureRmResourceGroupName: 'project3'
+          backendAzureRmStorageAccountName: 'daxproj3tf'
+          backendAzureRmContainerName: 'terraform'
+          backendAzureRmKey: 'terraform.tfstate'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+      
+    - task: TerraformTaskV2@2
+      inputs:
+        provider: 'azurerm'
+        command: 'destroy'
+        commandOptions: |
+          -auto-approve 
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        environmentServiceNameAzureRM: 'Project3'
+
+#- stage: Build
+#  jobs:
+# - job: Build
+#    pool:
+#      name: Hosted Ubuntu 1604
+ #   steps:
+    # Needed for Terraform VM deployment
+    # - task: InstallSSHKey@0
+    #   inputs:
+    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
+    #     sshPublicKey: 'PUBLIC_KEY'
+    #     sshKeySecureFile: 'id_rsa'
 #    - task: ArchiveFiles@2
 #      displayName: 'Archive FakeRestAPI'
 #      inputs:
@@ -90,8 +147,7 @@ stages:
   #           inputs:
   #             targetType: 'inline'
   #             script: |
-  #               #! /bin/bash
-                
+  #               #! /bin/bash              
   #               sudo apt-get upgrade -y
   #               sudo apt-get install python3-pip -y
   #               sudo apt-get install unzip -y
