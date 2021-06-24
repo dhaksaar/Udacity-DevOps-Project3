@@ -87,7 +87,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: 'Project3rg-sc'
+              azureSubscription: 'project3rg-sc'
               appName: 'DaxinDemoApp-AppService'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
@@ -111,31 +111,31 @@ stages:
           targetType: 'inline'
           script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform
            
-    - task: TerraformInstaller@0
-      displayName: Install Terraform
-      inputs:
-          terraformVersion: 'v0.15.4'
+#    - task: TerraformInstaller@0
+#      displayName: Install Terraform
+#      inputs:
+#          terraformVersion: 'v0.15.4'
       
-    - task: TerraformTaskV2@2
-      displayName: "Terraform Init"
-      inputs:
-          provider: 'azurerm'
-          command: 'init'
-          backendServiceArm: 'Project3'
-          backendAzureRmResourceGroupName: 'project3'
-          backendAzureRmStorageAccountName: 'daxproj3tf'
-          backendAzureRmContainerName: 'terraform'
-          backendAzureRmKey: 'terraform.tfstate'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+#    - task: TerraformTaskV2@2
+#      displayName: "Terraform Init"
+#      inputs:
+#          provider: 'azurerm'
+#          command: 'init'
+#          backendServiceArm: 'Project3'
+#          backendAzureRmResourceGroupName: 'project3'
+#          backendAzureRmStorageAccountName: 'daxproj3tf'
+#          backendAzureRmContainerName: 'terraform'
+#          backendAzureRmKey: 'terraform.tfstate'
+#          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       
-    - task: TerraformTaskV2@2
-      inputs:
-        provider: 'azurerm'
-        command: 'destroy'
-        commandOptions: |
-          -auto-approve 
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-        environmentServiceNameAzureRM: 'Project3'
+#    - task: TerraformTaskV2@2
+#      inputs:
+#        provider: 'azurerm'
+#        command: 'destroy'
+#        commandOptions: |
+#          -auto-approve 
+#        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+#        environmentServiceNameAzureRM: 'Project3'
 
 
   # - deployment: VMDeploy
