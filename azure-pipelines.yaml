@@ -30,7 +30,7 @@ stages:
       inputs:
           provider: 'azurerm'
           command: 'init'
-          backendServiceArm: 'Project3'
+          backendServiceArm: 'azrm-sc'
           backendAzureRmResourceGroupName: 'project3'
           backendAzureRmStorageAccountName: 'daxproj3tf'
           backendAzureRmContainerName: 'terraform'
@@ -48,7 +48,7 @@ stages:
         commandOptions: |
           -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-        environmentServiceNameAzureRM: 'Project3'
+        environmentServiceNameAzureRM: 'azrm-sc'
 - stage: Build
   jobs:
   - job:  Build
@@ -87,7 +87,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: 'Pay-As-You-Go(01a8947a-1aa7-45ad-8bd4-e0ab9e615903)'
+              azureSubscription: 'azrm-sc'
               appName: 'DaxinDemoApp-AppService'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
