@@ -102,6 +102,7 @@ stages:
     - task: JMeterInstaller@0
       inputs:
         jmeterVersion: '5.4.1'
+    
     - task: Bash@3
       inputs:
       targetType: 'inline'
