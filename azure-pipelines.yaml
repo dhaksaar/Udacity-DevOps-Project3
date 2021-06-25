@@ -104,20 +104,6 @@ stages:
         jmeterVersion: '5.4.1'
     - bash: jmeter -n -t automatedtesting/jmeter/StressTest.jmx -l log/jmeter/StressTest-result.csv -e -f -o log/jmeter/StressTest-html-report  -j log/jmeter/StressTest.log
 
-    - task: ArchiveFiles@2
-      inputs:
-      rootFolderOrFile: '$(Build.BinariesDirectory)/log/jmeter'
-      includeRootFolder: true
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/JmeterLogs.zip'
-      replaceExistingArchive: true
-
-    - task: PublishPipelineArtifact@1
-    inputs:
-    targetPath: '$(Pipeline.Workspace)/JmeterLogs.zip'
-    artifact: 'JmeterLogs'
-    publishLocation: 'pipeline'
-
 - stage: destroy_infrastructure
   jobs:
   - job:  destroy_infrastructure
