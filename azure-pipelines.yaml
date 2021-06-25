@@ -114,8 +114,8 @@ stages:
       
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)/JmeterLogs.zip'
-        artifact: 'JmeterLogs'
+        targetPath: '$(Build.ArtifactStagingDirectory)/JMeterReport.zip'
+        artifact: 'JmeterReport'
         publishLocation: 'pipeline'
 
 - stage: destroy_infrastructure
