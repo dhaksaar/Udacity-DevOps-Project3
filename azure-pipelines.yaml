@@ -111,7 +111,13 @@ stages:
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/JMeterReport.zip'
         replaceExistingArchive: true
-    
+      
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/JmeterLogs.zip'
+        artifact: 'JmeterLogs'
+        publishLocation: 'pipeline'
+
 - stage: destroy_infrastructure
   jobs:
   - job:  destroy_infrastructure
