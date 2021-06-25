@@ -103,12 +103,7 @@ stages:
       inputs:
         jmeterVersion: '5.4.1'
     
-    - task: Bash@3
-      displayName: Run JMeter Stress Test
-      inputs: 
-      targetType: 'inline'
-      script: ''
-   
+    
     - task: ArchiveFiles@2
       inputs:
       rootFolderOrFile: '$(Build.BinariesDirectory)/log/jmeter'
