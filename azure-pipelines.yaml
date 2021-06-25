@@ -102,12 +102,9 @@ stages:
     - task: JMeterInstaller@0
       inputs:
         jmeterVersion: '5.4.1'
-    - task: Bash@3
-      displayName: Run JMeter Stress Test
-      inputs: 
-      targetType: 'inline'
+    - task: CmdLine@2
+      inputs:
       script: 'jmeter -n -t automatedtesting/jmeter/StressTest.jmx -l log/jmeter/StressTest-result.csv -e -f -o log/jmeter/StressTest-html-report  -j log/jmeter/StressTest.log'
-
         
 - stage: destroy_infrastructure
   jobs:
