@@ -103,21 +103,6 @@ stages:
       inputs:
         jmeterVersion: '5.4.1'
     
-    
-    - task: ArchiveFiles@2
-      inputs:
-      rootFolderOrFile: '$(Build.BinariesDirectory)/log/jmeter'
-      includeRootFolder: true
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/JmeterLogs.zip'
-      replaceExistingArchive: true
-
-    - task: PublishPipelineArtifact@1
-    inputs:
-    targetPath: '$(Pipeline.Workspace)/JmeterLogs.zip'
-    artifact: 'JmeterLogs'
-    publishLocation: 'pipeline'
-    
         
 - stage: destroy_infrastructure
   jobs:
