@@ -104,7 +104,8 @@ stages:
         jmeterVersion: '5.4.1'
     
     - task: Bash@3
-      inputs:
+      displayName: Run JMeter Stress Test
+      inputs: 
       targetType: 'inline'
       script: 'jmeter -n -t automatedtesting/jmeter/StressTest.jmx -l log/jmeter/StressTest-result.csv -e -f -o log/jmeter/StressTest-html-report  -j log/jmeter/StressTest.log'
    
