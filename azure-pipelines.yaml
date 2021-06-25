@@ -104,18 +104,33 @@ stages:
         jmeterVersion: '5.4.1'
     - bash: jmeter -n -t automatedtesting/jmeter/StressTest.jmx -l log/jmeter/StressTest-result.csv -e -f -o log/jmeter/StressTest-html-report  -j log/jmeter/StressTest.log
     
+    - bash: jmeter -n -t automatedtesting/jmeter/EnduranceTest.jmx -l log/jmeter/EnduranceTest-result.csv -e -f -o log/jmeter/EnduranceTest-html-report  -j log/jmeter/EnduranceTest.log
+  
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/log/jmeter'
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/log/jmeter/StressTest-html-report'
         includeRootFolder: true
         archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/JMeterReport.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/JMeterStressTestReport.zip'
         replaceExistingArchive: true
-      
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/log/jmeter/EnduranceTestReport-html-report'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/JMeterEnduranceTestReport.zip'
+        replaceExistingArchive: true
+    
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Build.ArtifactStagingDirectory)/JMeterReport.zip'
-        artifact: 'JmeterReport'
+        targetPath: '$(Build.ArtifactStagingDirectory)/JMeterStressTestReport.zip'
+        artifact: 'JMeterStressTestReport'
+        publishLocation: 'pipeline'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/JMeterEnduranceTestReport.zip'
+        artifact: 'JMeterEnduranceTestReport'
         publishLocation: 'pipeline'
 
 - stage: destroy_infrastructure
