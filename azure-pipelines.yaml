@@ -115,7 +115,7 @@ stages:
         replaceExistingArchive: true
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/log/jmeter/EnduranceTestReport-html-report'
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/log/jmeter/EnduranceTest-html-report'
         includeRootFolder: true
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/JMeterEnduranceTestReport.zip'
