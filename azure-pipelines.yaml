@@ -93,7 +93,7 @@ stages:
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
 
 
-- stage: : Regression Testing
+- stage: RegressionTesting
   jobs:
   - job: Regression_Testing
     displayName: Regression Testing
@@ -112,7 +112,7 @@ stages:
         targetType: 'inline'
         script: 'newman run automatedtesting/postman/RegressionTest.json --reporters junit --reporter-junit-export  log/RegressionTest.xml'
 
-- stage: Performance Testing
+- stage: PerformanceTesting
   jobs:
   - job:  Testing
     displayName: Testing
