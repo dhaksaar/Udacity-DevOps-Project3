@@ -111,7 +111,11 @@ stages:
       inputs:
         targetType: 'inline'
         script: 'newman run automatedtesting/postman/RegressionTest.json --reporters junit --reporter-junit-export  log/RegressionTest.xml'
-
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'log/RegressionTest.xml'
+      
 - stage: PerformanceTesting
   jobs:
   - job:  Testing
