@@ -22,7 +22,7 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: 'known_hosts'
-        sshKeySecureFile: 'id_rsa'
+        sshKeySecureFile: 'id_rsa.pub'
       
     - task: TerraformInstaller@0
       displayName: Install Terraform
