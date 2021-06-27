@@ -22,6 +22,7 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: 'known_hosts'
+        sshPublicKey: $(SSH-Public-Key)
         sshKeySecureFile: 'id_rsa.pub'
       
     - task: TerraformInstaller@0
