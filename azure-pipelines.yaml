@@ -110,11 +110,12 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: 'newman run automatedtesting/postman/RegressionTest.json --reporters junit --reporter-junit-export  log/RegressionTest.xml'
+        script: 'newman run automatedtesting/postman/RegressionTest.json --reporters junit --reporter-junit-export  RegressionTest.xml'
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: 'log/RegressionTest.xml'
+        testResultsFiles: 'RegressionTest.xml'
       
 - stage: PerformanceTesting
   jobs:
