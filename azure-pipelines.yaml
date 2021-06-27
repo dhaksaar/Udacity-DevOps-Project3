@@ -102,7 +102,7 @@ stages:
     steps:
     - task: NodeTool@0
       inputs:
-        versionSpec: '6.x'    
+        versionSpec: '10.x'    
     - task: Bash@3
       inputs:
         targetType: 'inline'
