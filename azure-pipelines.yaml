@@ -24,12 +24,7 @@ stages:
         knownHostsEntry: 'known_hosts'
         sshPublicKey: $(SSH-Public-Key)
         sshKeySecureFile: 'id_rsa'
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: |
-          ls
-          cat id_rsa.pub
+    
     - task: TerraformInstaller@0
       displayName: Install Terraform
       inputs:
