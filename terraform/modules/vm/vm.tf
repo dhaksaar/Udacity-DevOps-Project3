@@ -1,4 +1,4 @@
-resource "azurerm_network_interface" "" {
+resource "azurerm_network_interface" "test" {
   name                = ""
   location            = ""
   resource_group_name = ""
@@ -11,7 +11,7 @@ resource "azurerm_network_interface" "" {
   }
 }
 
-resource "azurerm_linux_virtual_machine" "" {
+resource "azurerm_linux_virtual_machine" "test" {
   name                = ""
   location            = ""
   resource_group_name = ""
