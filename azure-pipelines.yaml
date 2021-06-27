@@ -19,7 +19,12 @@ stages:
       inputs:
           targetType: 'inline'
           script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform
-           
+    - task: InstallSSHKey@0
+      inputs:
+        knownHostsEntry: 'known_hosts'
+        sshPublicKey: $(SSH-Public-Key)
+        sshKeySecureFile: 'id_rsa.pub'
+      
     - task: TerraformInstaller@0
       displayName: Install Terraform
       inputs:
