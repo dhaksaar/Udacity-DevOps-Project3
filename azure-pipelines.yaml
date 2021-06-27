@@ -7,7 +7,7 @@ stages:
   - job:  provision_infrastructure
     displayName: Provision Infrastructure
     pool:
-      name: Hosted Ubuntu 1604
+      vmImage: 'ubuntu-18.04'
     steps:
     - task: DownloadSecureFile@1
       displayName: Download terraform.tfvars 
@@ -53,7 +53,7 @@ stages:
   jobs:
   - job:  Build
     pool:
-      name: Hosted Ubuntu 1604
+      vmImage: 'ubuntu-18.04'
     steps:
     #- task: DownloadSecureFile@1
     # Needed for Terraform VM deployment
@@ -98,7 +98,7 @@ stages:
   - job: Regression_Testing
     displayName: Regression Testing
     pool: 
-      name:Hosted Ubuntu 1604
+      vmImage: 'ubuntu-18.04'
     steps:
     - task: NodeTool@0
       inputs:
@@ -121,7 +121,7 @@ stages:
   - job:  Testing
     displayName: Testing
     pool:
-      name: Hosted Ubuntu 1604
+      vmImage: 'ubuntu-18.04'
     steps:
     - task: JMeterInstaller@0
       inputs:
@@ -162,7 +162,7 @@ stages:
   - job:  destroy_infrastructure
     displayName: Destroy Infrastructure
     pool:
-      name: Hosted Ubuntu 1604
+      vmImage: 'ubuntu-18.04'
     steps:
     - task: DownloadSecureFile@1
       displayName: Download terraform.tfvars 
