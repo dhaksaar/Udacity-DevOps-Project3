@@ -54,6 +54,14 @@ stages:
           -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
         environmentServiceNameAzureRM: 'azrm-sc'
+  
+    - bash: |
+        terraform output
+        export VM_PUBLIC_IP=$(terraform output publicip)
+        echo $VM_PUBLIC_IP
+        ssh $VM_PUBLIC_IP
+      displayName: Check Public IP Address
+      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     - task: Bash@3
       inputs:
         targetType: 'inline'
@@ -63,7 +71,7 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: 'echo $VM_PUBLIC_IP'
+        script: 'ssh $VM_PUBLIC_IP'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
 
 
