@@ -54,6 +54,12 @@ stages:
           -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
         environmentServiceNameAzureRM: 'azrm-sc'
+    
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: 'terraform output'
+
 - stage: Build
   jobs:
   - job:  Build
