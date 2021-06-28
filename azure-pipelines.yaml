@@ -59,6 +59,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: 'terraform output'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
 
 - stage: Build
   jobs:
