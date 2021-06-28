@@ -59,7 +59,7 @@ stages:
         terraform output
         export VM_PUBLIC_IP=$(terraform output -raw publicip)
         echo $VM_PUBLIC_IP
-        ssh $VM_PUBLIC_IP
+        ssh daxadmin@$VM_PUBLIC_IP
       displayName: Check Public IP Address
       workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     - task: Bash@3
