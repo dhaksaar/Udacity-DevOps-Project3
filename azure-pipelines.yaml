@@ -23,8 +23,8 @@ stages:
       inputs:
         knownHostsEntry: 'known_hosts'
         sshPublicKey: $(SSH-Public-Key)
-        sshKeySecureFile: 'id_rsa.pub'
-      
+        sshKeySecureFile: 'id_rsa'
+    
     - task: TerraformInstaller@0
       displayName: Install Terraform
       inputs:
@@ -54,6 +54,12 @@ stages:
           -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
         environmentServiceNameAzureRM: 'azrm-sc'
+    
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: 'terraform output'
+
 - stage: Build
   jobs:
   - job:  Build
