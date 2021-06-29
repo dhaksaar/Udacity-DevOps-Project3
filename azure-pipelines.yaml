@@ -90,13 +90,6 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: fakerestapi
-    - task: ArchiveFiles@2
-      displayName: 'Archive Selenium'
-      inputs:
-        rootFolderOrFile: 'automatedtesting/selenium/selenium.py'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-selenium.zip'
    
     - publish: 'automatedtesting/selenium/selenium.py'
       displayName: 'Publish Selenium Test Script'
@@ -203,6 +196,25 @@ stages:
         targetPath: '$(Build.ArtifactStagingDirectory)/JMeterEnduranceTestReport.zip'
         artifact: 'JMeterEnduranceTestReport'
         publishLocation: 'pipeline'
+  
+  - deployment: UI_Testing
+    displayName: Functional UI Testing
+    environment:
+      name: 'TEST2'
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - bash: |
+              cd $(Pipeline.Workspace)/selenium
+              sudo python3  selenium-test.py > selenium-test.log
+            displayName: Run Selenium Test-Suite
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Selenium Test logs
+            inputs:
+              targetPath: '$(Pipeline.Workspace)/selenium/selenium-test.log'
+              artifactName: 'Selenium-Test-Logs'
 
 - stage: destroy_infrastructure
   jobs:
