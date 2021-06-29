@@ -89,7 +89,18 @@ stages:
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
-      artifact: drop-fakerestapi
+      artifact: fakerestapi
+    - task: ArchiveFiles@2
+      displayName: 'Archive Selenium'
+      inputs:
+        rootFolderOrFile: 'automatedtesting/selenium/selenium.py'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-selenium.zip'
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-selenium.zip
+      displayName: 'Upload Package'
+      artifact: selenium
+      
   - deployment: setup_vm
     displayName: Setup Virtual Machine
     environment:
