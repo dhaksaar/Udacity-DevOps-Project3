@@ -70,22 +70,9 @@ stages:
         terraform output
         export VM_PUBLIC_IP=$(terraform output -raw publicip)
         echo $VM_PUBLIC_IP
-        ssh -i id_rsa daxadmin@$VM_PUBLIC_IP -T
-        EOT
-      displayName: Check Public IP Address
+      displayName: Get VM Public IP Address
       workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: 'export VM_PUBLIC_IP=$(terraform output publicip)' 
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: 'ssh $VM_PUBLIC_IP'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-
 
 - stage: Build
   jobs:
@@ -130,6 +117,25 @@ stages:
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
 
+  - deployment: setup_vm
+    displayName: Setup Virtual Machine
+    environment:
+      name: 'TEST2'
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - bash: |
+              sudo apt-get update -y
+              sudo apt-get install python3-pip -y
+              sudo apt-get install -y chromium-browser
+              sudo apt-get install -y chromium-chromedriver
+              python3 -m pip install --upgrade pip
+              pip3 install selenium
+              chromium-browser -version
+              chromium-chromedriver -version
+            displayName: Install selenium
 
 - stage: RegressionTesting
   jobs:
