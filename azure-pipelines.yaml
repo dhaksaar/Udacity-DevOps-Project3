@@ -138,7 +138,7 @@ stages:
               azureSubscription: 'azrm-sc'
               appName: 'DaxinDemoApp-AppService'
               appType: webApp
-              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+              package: $(Pipeline.Workspace)/fakerestapi/$(Build.BuildId)-fakerestapi.zip
 
 - stage: Test
   jobs:
