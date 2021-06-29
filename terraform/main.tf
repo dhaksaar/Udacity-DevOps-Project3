@@ -7,8 +7,8 @@ provider "azurerm" {
 }
 terraform {
   backend "azurerm" {
-    storage_account_name = "daxproj3tf"
-    container_name       = "terraform"
+    storage_account_name = "udacityproject3"
+    container_name       = "terraformstate"
     key                  = "terrafom.tfstate"
   }
 }
