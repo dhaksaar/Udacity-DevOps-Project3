@@ -134,13 +134,14 @@ stages:
               python3 -m pip install --upgrade pip
               pip3 install selenium
               chromium-browser -version
-              chromium-chromedriver -version
+              chromedriver -version
             displayName: Install selenium
 
-- stage: RegressionTesting
+
+- stage: Test
   jobs:
   - job: Regression_Testing
-    displayName: Regression Testing
+    displayName: Regression Testing with Postman
     pool: 
       vmImage: 'ubuntu-18.04'
     steps:
@@ -160,11 +161,9 @@ stages:
       inputs:
         testResultsFormat: 'JUnit'
         testResultsFiles: 'RegressionTest.xml'
-      
-- stage: PerformanceTesting
-  jobs:
-  - job:  Testing
-    displayName: Testing
+        
+  - job:  Performance_Testing
+    displayName: Performance Testing with JMeter
     pool:
       vmImage: 'ubuntu-18.04'
     steps:
