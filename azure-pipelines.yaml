@@ -97,8 +97,9 @@ stages:
         includeRootFolder: false
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-selenium.zip'
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-selenium.zip
-      displayName: 'Upload Package'
+   
+    - publish: 'automatedtesting/selenium/selenium.py'
+      displayName: 'Publish Selenium Test Script'
       artifact: selenium
       
   - deployment: setup_vm
