@@ -80,13 +80,6 @@ stages:
     pool:
       vmImage: 'ubuntu-18.04'
     steps:
-    #- task: DownloadSecureFile@1
-    # Needed for Terraform VM deployment
-    # - task: InstallSSHKey@0
-    #   inputs:
-    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
-    #     sshPublicKey: 'PUBLIC_KEY'
-    #     sshKeySecureFile: 'id_rsa'
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
@@ -97,26 +90,6 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
-
-
-- stage: Deployment
-  jobs:
-  - deployment: FakeRestAPI
-    pool:
-      vmImage: 'Ubuntu-16.04'
-    environment: 'TEST'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App'
-            inputs:
-              azureSubscription: 'azrm-sc'
-              appName: 'DaxinDemoApp-AppService'
-              appType: webApp
-              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-
   - deployment: setup_vm
     displayName: Setup Virtual Machine
     environment:
@@ -137,6 +110,24 @@ stages:
               chromedriver -version
             displayName: Install selenium
 
+- stage: Deployment
+  jobs:
+  - deployment: deploy_azureapp
+    displayName: Deploy Azure App Service 
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    environment: 'TEST'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            displayName: 'Deploy Azure Web App'
+            inputs:
+              azureSubscription: 'azrm-sc'
+              appName: 'DaxinDemoApp-AppService'
+              appType: webApp
+              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
 
 - stage: Test
   jobs:
@@ -161,7 +152,7 @@ stages:
       inputs:
         testResultsFormat: 'JUnit'
         testResultsFiles: 'RegressionTest.xml'
-        
+
   - job:  Performance_Testing
     displayName: Performance Testing with JMeter
     pool:
