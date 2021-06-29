@@ -36,9 +36,9 @@ stages:
           provider: 'azurerm'
           command: 'init'
           backendServiceArm: 'azrm-sc'
-          backendAzureRmResourceGroupName: 'project3'
-          backendAzureRmStorageAccountName: 'daxproj3tf'
-          backendAzureRmContainerName: 'terraform'
+          backendAzureRmResourceGroupName: 'udacity-project3'
+          backendAzureRmStorageAccountName: 'udacityproject3'
+          backendAzureRmContainerName: 'terraformstate'
           backendAzureRmKey: 'terraform.tfstate'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       
@@ -232,10 +232,10 @@ stages:
 #      inputs:
 #          provider: 'azurerm'
 #          command: 'init'
-#          backendServiceArm: 'Project3'
-#          backendAzureRmResourceGroupName: 'project3'
-#          backendAzureRmStorageAccountName: 'daxproj3tf'
-#          backendAzureRmContainerName: 'terraform'
+#          backendServiceArm: 'udacity-project3'
+#          backendAzureRmResourceGroupName: 'udacity-project3'
+#          backendAzureRmStorageAccountName: 'udacityproject3'
+#          backendAzureRmContainerName: 'terraformstate'
 #          backendAzureRmKey: 'terraform.tfstate'
 #          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       
