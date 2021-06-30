@@ -208,13 +208,13 @@ stages:
           steps:
           - bash: |
               cd $(Pipeline.Workspace)/selenium
-              sudo python3  selenium_ui_test.py > selenium-test.log
+              sudo python3  selenium_ui_test.py > selenium-result.log
             displayName: Run Selenium Test-Suite
           - task: PublishPipelineArtifact@1
-            displayName: Publish Selenium Test logs
+            displayName: Publish Selenium Result logs
             inputs:
-              targetPath: '$(Pipeline.Workspace)/selenium/selenium-test.log'
-              artifactName: 'Selenium-Test-Logs'
+              targetPath: '$(Pipeline.Workspace)/selenium/selenium-result.log'
+              artifactName: 'SeleniumTestResult'
 
 - stage: destroy_infrastructure
   jobs:
