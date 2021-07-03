@@ -6,7 +6,7 @@ from datetime import datetime
 
 # Start the browser and login with standard_user
 def login (user, password):
-    print (datetime.now().strftime("%Y-%m-%d %H:%M:%S") +'\tStarting the browser...')
+    print(datetime.now().strftime("%Y-%m-%d %H:%M:%S") +'\tStarting the browser...')
     # --uncomment when running in Azure DevOps.
     options = ChromeOptions()
     options.add_argument("--headless") 
@@ -19,7 +19,6 @@ def login (user, password):
     driver.find_element_by_css_selector("input[id='password']").send_keys(password)
     driver.find_element_by_id("login-button").click()
     inventory_label = driver.find_element_by_css_selector("div[class='inventory_item_label']").text
-    print(inventory_label)
     assert "Sauce Labs Backpack" in inventory_label
     print(datetime.now().strftime("%Y-%m-%d %H:%M:%S") +'\tLoggged in  with username {:s} and password {:s} successfully'.format(user, password))
     return driver
@@ -52,7 +51,6 @@ def removeFromCart(driver):
         backBtn = driver.find_element_by_id('back-to-products')
         backBtn.click()
         print(datetime.now().strftime("%Y-%m-%d %H:%M:%S") +'\tNavigated to url:'+driver.current_url)
-     
 
 driver = login('standard_user', 'secret_sauce')
 addToCart(driver)
