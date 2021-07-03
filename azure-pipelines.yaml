@@ -208,7 +208,9 @@ stages:
           steps:
           - bash: |
               cd $(Pipeline.Workspace)/selenium
+              sudo rm selenium-result.log
               sudo python3  selenium_ui_test.py > selenium-result.log
+              sudo cp selenium-result.log /selenium/log
             displayName: Run Selenium Test-Suite
           - task: PublishPipelineArtifact@1
             displayName: Publish Selenium Result logs
