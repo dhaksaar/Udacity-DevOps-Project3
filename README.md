@@ -1,12 +1,12 @@
 ### Udacity-DevOps-Project3
 
-#Project Overview
+# Project Overview
 
 In this project we will build a disposable test environment and ensure the quality of the application with various automated testing (Regression,Functional UI and Performance) and also  monitor and provide insight into the application's behavior, and determine root causes by querying the application’s custom log file.
 
 ![image](https://user-images.githubusercontent.com/24310615/124194544-af074f80-dac0-11eb-86ab-5d1171347c61.png)
 
-#Tools Used 
+# Tools Used 
 
 Azure DevOps
 Selenium
@@ -16,9 +16,9 @@ Postman
 Azure Monitor
 Azure Log Analytics
 
-#Getting Started
+# Getting Started
 
-#Setting up the terraform backend
+# Setting up the terraform backend
 
 1.Create a SSH key and clone the repository 
 
@@ -88,24 +88,46 @@ client_id = ""
 client_secret = ""
 tenant_id = ""
  ```
- 10. Create a project in Azure DevOps if not already created
  
- 11. Install these Extensions :
+ 10. Create a Log analytics workspace and copy the agent registration script. This script will be later executed once the VM is created
  
- a.JMeter (https://marketplace.visualstudio.com/items?itemName=AlexandreGattiker.jmeter-tasks&targetId=625be685-7d04-4b91-8e92-0a3f91f6c3ac&utm_source=vstsproduct&utm_medium=ExtHubManageList)
+ 11. Create a custom log in the log analytics workspace. Upload the selenium-sample.log , delimited by timestamp and provide the linux vm path as \selenium\log
+ 
+ 
+ 12. Create a project in Azure DevOps if not already created
+ 
+ 13. Install the below Extensions :
 
- b.Terraform (https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks&targetId=625be685-7d04-4b91-8e92-0a3f91f6c3ac&utm_source=vstsproduct&utm_medium=ExtHubManageList)
+      a.JMeter (https://marketplace.visualstudio.com/items?itemName=AlexandreGattiker.jmeter-tasks&targetId=625be685-7d04-4b91-8e92-0a3f91f6c3ac&utm_source=vstsproduct&utm_medium=ExtHubManageList)
+
+      b.Terraform (https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks&targetId=625be685-7d04-4b91-8e92-0a3f91f6c3ac&utm_source=vstsproduct&utm_medium=ExtHubManageList)
+
+ 
+ 14. Create a service connection of type Azure Resource Manager (name the service as azrm-sc)
+ 
+ 15. Create an Environment with name TEST
+ 
+ 16. Add a Virtual Machine resource to the environment and copy the registration script. This script will be later executed in the virtual machine created in the terraform which      will allow pipeline to run ssh commands on the VM.
  
  
- 12. Create a service connection of type Azure Resource Manager (name the service as azrm-sc)
+ 17. Upload the terraform.tfvars file and the public key (id_rsa.pub) in the secure library
  
- 13. Create an Environment with name TEST
+ 18. Create a new pipeline , select the repository and select Github and build pipeline from existing yaml file
  
- 14.Upload the terraform.tfvars file and the private key in the secure library
+ 19. Modify the yaml file with the Service connection name, Environment names
  
- 15. Create a new pipeline , select the repository and select Github and build pipeline from existing yaml file
+ 20. Add a pipeline variable "SSH-Public-Key" and copy the value of Public Key created earlier
  
- 16. Modify the yaml file with the Service connection name
+ 21. Once the infrastructure is povisioned, ssh into the created VM and execute the scripts copied from steps 10 and 16
+ 
+ 22. After the pipeline is executed successfully the below artifactes wiill be available in the pipeline
+ 
+ 
+ 23. In Azure portal create a alert on the App Service that is created from the pipeline
+     
+ 24. After the alert rule is successfully created, try to alert some alert by navigating to invalid URL. 
+ 
+ 25. Once the threshold limit has exceeded, an email will sent to the specified email address.
  
  
  
