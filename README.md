@@ -75,44 +75,45 @@ client_secret = ""
 tenant_id = ""
  ```
   
+ 10. Create a Log analytics workspace and note down the Workspace ID and Key. These details will be later used by azure pipeline to push the log messages.
+  
+ 11. Create a project in Azure DevOps if not already created
  
- 10. Create a project in Azure DevOps if not already created
- 
- 11. Install the below Extensions :
+ 12. Install the below Extensions :
 
       a.JMeter (https://marketplace.visualstudio.com/items?itemName=AlexandreGattiker.jmeter-tasks&targetId=625be685-7d04-4b91-8e92-0a3f91f6c3ac&utm_source=vstsproduct&utm_medium=ExtHubManageList)
 
       b.Terraform (https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks&targetId=625be685-7d04-4b91-8e92-0a3f91f6c3ac&utm_source=vstsproduct&utm_medium=ExtHubManageList)
 
  
- 12. Create a service connection of type Azure Resource Manager (name the service as azrm-sc) [by navigating to Project Settings -> Service Connection ->Click on Create New Service Connection -> Choose "Azure Resource Manager" -> Choose "Service Principal(automatic) -> Select scope as subscription -> give the name as azrm-sc]
+ 13. Create a service connection of type Azure Resource Manager (name the service as azrm-sc) [by navigating to Project Settings -> Service Connection ->Click on Create New Service Connection -> Choose "Azure Resource Manager" -> Choose "Service Principal(automatic) -> Select scope as subscription -> give the name as azrm-sc]
  
- 13. In Azure DevOps, under Pipeline select Environments and create an Environment with name TEST
+ 14. In Azure DevOps, under Pipeline select Environments and create an Environment with name TEST
  
- 14. Add a Virtual Machine resource to the environment and copy the registration script for operating system Linux. 
+ 15. Add a Virtual Machine resource to the environment and copy the registration script for operating system Linux. 
      This script will be later executed in the virtual machine created in the terraform which will allow pipeline to run ssh commands on the VM.
  
  
- 15. Upload the terraform.tfvars file and the public key (id_rsa.pub) in the secure library
+ 16. Upload the terraform.tfvars file and the public key (id_rsa.pub) in the secure library
      [Navigate to Azure Devops-> Pipelines -> Library -> Secure Files -> + Secure Files]
  
- 16. Create a new pipeline , select the repository and select GitHub and build pipeline from existing yaml file
+ 17. Create a new pipeline , select the repository and select GitHub and build pipeline from existing yaml file
  
- 17. Modify the yaml file with the Service connection name, Environment names
+ 18. Modify the yaml file with the Service connection name, Environment names
  
- 18. Add a pipeline variable "SSH-Public-Key" and copy the value of Public Key created earlier
+ 19. Add a pipeline variable "SSH-Public-Key" and copy the value of Public Key created earlier
+  
+ 20. Add pipeline variable "Log-Workspace" and "Log-Key" and set the values with the Workspace ID and Key generated from step 10.
  
- 19. Once the infrastructure is povisioned, login into the created VM using and execute the scripts copied from step 14
+ 21 Once the infrastructure is povisioned, login into the created VM using and execute the scripts copied from step 14
  
- 20. After the pipeline is executed successfully the below artifactes will be available in the pipeline
- 
- 21. Create a Log analytics workspace and copy the agent registration script. This script will be later executed once the VM is created
- 
- 22. Create a custom log in the log analytics workspace. Upload the selenium-sample.log , delimited by timestamp and provide the linux vm path as \selenium\log
+ 22 After the pipeline is executed successfully the below artifactes will be available in the pipeline
+    JMeter Endurance Test report
+    JMeter Stress Test report
+    Selenium UI Test logs
   
  23. In Azure portal create a alert on the App Service that is created from the pipeline
      
  24. After the alert rule is successfully created, try to alert some alert by navigating to invalid URL. 
  
  25. Once the threshold limit has exceeded, an email will sent to the specified email address.
- 
