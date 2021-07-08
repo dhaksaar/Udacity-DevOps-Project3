@@ -210,7 +210,9 @@ stages:
               cd $(Pipeline.Workspace)/selenium
               sudo rm selenium-result.log
               sudo python3  selenium_ui_test.py > selenium-result.log
-              python3 publishlog.py selenium-result.log $(Log-WORKSPACE) $(Log-KEY) > publish.log 
+              python3 publishlog.py selenium-result.log $(LOG-WORKSPACE) $(LOG-KEY) > publish.log 
+              sudo cat publish.log
+              sudo cp publish.log /var/log
             displayName: Run Selenium Test-Suite
           - task: PublishPipelineArtifact@1
             displayName: Publish Selenium Result logs
