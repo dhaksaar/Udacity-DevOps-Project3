@@ -1,0 +1,39 @@
+2021-07-08 12:45:46	Starting the browser...
+2021-07-08 12:45:48	Browser started successfully. Navigating to the demo page to login.
+2021-07-08 12:45:50	Loggged in  with username standard_user and password secret_sauce successfully
+2021-07-08 12:45:50	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=4
+2021-07-08 12:45:50	Added inventory Sauce Labs Backpack to cart
+2021-07-08 12:45:50	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:50	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=0
+2021-07-08 12:45:50	Added inventory Sauce Labs Bike Light to cart
+2021-07-08 12:45:50	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:50	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=1
+2021-07-08 12:45:50	Added inventory Sauce Labs Bolt T-Shirt to cart
+2021-07-08 12:45:50	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:50	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=5
+2021-07-08 12:45:51	Added inventory Sauce Labs Fleece Jacket to cart
+2021-07-08 12:45:51	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:51	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=2
+2021-07-08 12:45:51	Added inventory Sauce Labs Onesie to cart
+2021-07-08 12:45:51	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:51	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=3
+2021-07-08 12:45:51	Added inventory Test.allTheThings() T-Shirt (Red) to cart
+2021-07-08 12:45:51	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:51	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=4
+2021-07-08 12:45:51	Remove inventory Sauce Labs Backpack from cart
+2021-07-08 12:45:51	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:51	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=0
+2021-07-08 12:45:51	Remove inventory Sauce Labs Bike Light from cart
+2021-07-08 12:45:51	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:51	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=1
+2021-07-08 12:45:51	Remove inventory Sauce Labs Bolt T-Shirt from cart
+2021-07-08 12:45:52	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:52	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=5
+2021-07-08 12:45:52	Remove inventory Sauce Labs Fleece Jacket from cart
+2021-07-08 12:45:52	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:52	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=2
+2021-07-08 12:45:52	Remove inventory Sauce Labs Onesie from cart
+2021-07-08 12:45:52	Navigated to url:https://www.saucedemo.com/inventory.html
+2021-07-08 12:45:52	Navigated to url:https://www.saucedemo.com/inventory-item.html?id=3
+2021-07-08 12:45:52	Remove inventory Test.allTheThings() T-Shirt (Red) from cart
+2021-07-08 12:45:52	Navigated to url:https://www.saucedemo.com/inventory.html
