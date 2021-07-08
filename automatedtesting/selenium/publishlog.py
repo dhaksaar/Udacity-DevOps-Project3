@@ -15,6 +15,8 @@ customer_id = sys.argv[2]
 # For the shared key, use either the primary or the secondary Connected Sources client authentication key   
 shared_key = sys.argv[3]
 
+log_type = 'Selenium-UI-Test-Log'
+
 # dictionary where the lines from
 # text will be stored
 json_data  = []
@@ -26,7 +28,7 @@ with open(filename) as fh:
         testlog = {}
         # reads each line and trims of extra the spaces
         # and gives only the valid words
-        timestamp,comment = line.split("    ")
+        timestamp,comment = line.split("\t")
         testlog["timestamp"]=timestamp
         testlog["message"]=comment
         json_data.append(testlog)
