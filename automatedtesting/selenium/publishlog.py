@@ -15,7 +15,7 @@ customer_id = sys.argv[2]
 # For the shared key, use either the primary or the secondary Connected Sources client authentication key   
 shared_key = sys.argv[3]
 
-log_type = 'Selenium-UI-Test-Log'
+log_type = 'SeleniumUITestLog'
 
 # dictionary where the lines from
 # text will be stored
