@@ -91,11 +91,7 @@ stages:
       displayName: 'Upload Package'
       artifact: fakerestapi
    
-    - publish: 'automatedtesting/selenium/selenium_ui_test.py'
-      displayName: 'Publish Selenium Test Script'
-      artifact: selenium
-    
-    - publish: 'automatedtesting/selenium/publishlog.py'
+    - publish: 'automatedtesting/selenium'
       displayName: 'Publish Selenium Test Script'
       artifact: selenium
 
