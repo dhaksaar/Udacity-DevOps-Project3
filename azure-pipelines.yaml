@@ -91,10 +91,10 @@ stages:
       displayName: 'Upload Package'
       artifact: fakerestapi
    
-    - publish: 'automatedtesting/selenium/selenium_ui_test.py'
+    - publish: 'automatedtesting/selenium'
       displayName: 'Publish Selenium Test Script'
       artifact: selenium
-      
+
   - deployment: setup_vm
     displayName: Setup Virtual Machine
     environment:
@@ -210,7 +210,7 @@ stages:
               cd $(Pipeline.Workspace)/selenium
               sudo rm selenium-result.log
               sudo python3  selenium_ui_test.py > selenium-result.log
-              sudo cp selenium-result.log /selenium/log
+              python3 publishlog.py selenium-result.log $(Log-WORKSPACE) $(Log-KEY) > publish.log 
             displayName: Run Selenium Test-Suite
           - task: PublishPipelineArtifact@1
             displayName: Publish Selenium Result logs
